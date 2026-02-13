@@ -46,12 +46,13 @@
     left:50%;
     transform:translate(-50%,-50%);
     background:white;
-    padding:2rem;
-    border-radius:1rem;
-    box-shadow:0 5px 20px rgba(0,0,0,0.3);
+    padding:1.5rem;
+    border-radius:1.25rem;
+    box-shadow:0 10px 30px rgba(0,0,0,0.35);
     display:none;
     z-index:50;
-    max-width:90%;
+    width:90%;
+    max-width:400px;
   }
   .overlay{
     position:fixed;
@@ -64,11 +65,11 @@
   /* Click Hearts */
   .heart-emoji{
     cursor:pointer;
-    font-size:2.5rem;
+    font-size:2rem;
     animation: beat 1s infinite;
-    transition:transform .3s;
+    transition: transform 0.3s;
   }
-  .heart-emoji:hover{transform:scale(1.4);}
+  .heart-emoji:hover{transform:scale(1.35);}
   @keyframes beat{
     0%,100%{transform:scale(1);}
     50%{transform:scale(1.25);}
@@ -86,20 +87,21 @@
 
 <!-- Popup -->
 <div class="popup text-center" id="popup">
-  <p class="text-pink-600 text-2xl script-font"></p>
+  <p class="text-pink-600 text-lg sm:text-xl script-font leading-relaxed"></p>
   <button id="closePopup"
-    class="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-full transition">
+    class="mt-6 bg-pink-500 hover:bg-pink-600 text-white px-5 sm:px-6 py-2 rounded-full transition transform hover:scale-105">
     Close ❤️
   </button>
 </div>
 
-<!-- Content -->
-<section class="min-h-screen px-6 py-12 text-center relative z-10">
-  <h1 class="script-font text-5xl md:text-6xl text-pink-600 mb-14">
+<!-- Main Content -->
+<section class="min-h-screen px-4 sm:px-6 py-12 text-center relative z-10">
+
+  <h1 class="script-font text-3xl sm:text-4xl md:text-5xl text-pink-600 mb-12">
     😘 Pyaari Si Begum Ke Liye Pyaari Pyaari Baaten 😘
   </h1>
 
-  <div class="flex justify-center gap-8 flex-wrap">
+  <div class="flex justify-center gap-6 sm:gap-8 flex-wrap">
     <div onclick="showPopup('Ap meri zindagi ki sabse khoobsurat kahani ho ❤️')" class="heart-emoji">💖</div>
     <div onclick="showPopup('You make every day feel like Paradise 🌹')" class="heart-emoji">💘</div>
     <div onclick="showPopup('Jiski khubsurti se chaand bhi jalta ho, tum mere liye Allah ka tohfa ho 😘')" class="heart-emoji">💝</div>
@@ -107,22 +109,28 @@
     <div onclick="showPopup('Ap meri zindagi ka wo sach ho jo kabhi karwa nahi hota 🌟')" class="heart-emoji">💞</div>
   </div>
 
-  <div class="text-center mt-16">
+  <div class="mt-16">
     <a href="countdown.html"
-       class="bg-pink-500 hover:bg-pink-600 text-white px-10 py-4 rounded-full shadow-xl transition transform hover:scale-110">
+       class="bg-pink-500 hover:bg-pink-600 text-white px-6 sm:px-10 py-3 sm:py-4 rounded-full shadow-lg transition transform hover:scale-110">
        Valentine Countdown 💕
     </a>
   </div>
+
 </section>
 
 <!-- JS -->
 <script>
-/* Popup */
+/* Popup Logic */
 function showPopup(msg){
-  document.getElementById('popup').style.display='block';
-  document.querySelector('#popup p').innerText=msg;
-  document.getElementById('overlay').style.display='block';
+  const popup = document.getElementById('popup');
+  const overlay = document.getElementById('overlay');
+  const text = document.querySelector('#popup p');
+
+  text.innerText = msg;
+  popup.style.display='block';
+  overlay.style.display='block';
 }
+
 document.getElementById('closePopup').addEventListener('click',()=>{
   document.getElementById('popup').style.display='none';
   document.getElementById('overlay').style.display='none';
@@ -130,17 +138,19 @@ document.getElementById('closePopup').addEventListener('click',()=>{
 
 /* Floating Hearts */
 const heartsContainer = document.getElementById("hearts");
+
 function createHeart(){
   const heart = document.createElement("div");
   heart.classList.add("heart");
   heart.innerHTML = ["❤️","💖","💕","💘","💝"][Math.floor(Math.random()*5)];
   heart.style.left = Math.random()*100 + "vw";
-  heart.style.fontSize = 16 + Math.random()*26 + "px";
+  heart.style.fontSize = 14 + Math.random()*22 + "px";
   heart.style.animationDuration = 4 + Math.random()*4 + "s";
   heartsContainer.appendChild(heart);
   setTimeout(()=>heart.remove(),8000);
 }
-setInterval(createHeart,280);
+
+setInterval(createHeart,300);
 </script>
 
 </body>
